@@ -1,0 +1,34 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Favorite
+{% endblock %}
+
+{% block main %}
+<div class="container">
+
+<h4>Favorite Province</h4>
+
+<table class="table table-boreded" style="width: 50%; position: absolute; right: 25%;">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Province</td>
+            <td>AQI</td>            
+        </tr>
+    </thead>   
+    <tbody>
+        {% for row in fav %}    
+        <tr style="background-color: {{ row['color'] }}; color: #ffffff;">
+            <td> {{ row['i'] }} </td>
+            <td> <b>{{ row['en'] }} </b></td>
+            <td> {{ row['aqi'] }} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+{% endblock %}

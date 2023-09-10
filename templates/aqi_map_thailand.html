@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    AQI OF THAILAND
+{% endblock %}
+
+{% block main %}
+
+	<script src="https://api.longdo.com/map/?key=171082bb9618aa7b985baa7098d6bdce"></script>
+	<link rel="stylesheet" href="./static/MarkerCluster.Default.css">
+	<script type="text/javascript" src="./static/longdomap.markercluster-src.js"></script>
+	
+	<style type="text/css">
+          html{
+            height:100%;
+          }
+          body{
+            margin:0px;
+            height:100%;
+          }
+          #map {
+            height: 100%;
+            width: 100%;
+          }
+        </style>
+
+
+<body onload="init();">
+    <div class="row" >
+        <div class="col-12 col-md-6 col-lg-6" style="min-height: 600px;">
+            <div id="map"></div>           
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">                                  
+            
+
+            <div class="card" style="width: 100%; background-color: {{ curent_color }}; color: #ffffff;">
+                <div class="card-body">
+                  <h5 class="card-title">LIVE AQI INDEX Of <u>{{ province_en }}</u> : {{ grade }}</h5>
+                  <hr>
+                  <h3 class="card-subtitle mb-2 text-body-secondary">{{ curent_aqi }}</h3>                                  
+
+                    {% if fC %}
+                        <a 
+                            style="position: relative; top: -100px; right: -300px; text-decoration: none;">
+                        ✅
+                        </a>
+                    {% else %}
+                        
+                        <a href="AQI?pid={{ pid }}&f=1" 
+                            style="position: relative; top: -100px; right: -300px; text-decoration: none;">
+                        ⬜
+                        </a>
+                    {% endif %}
+
+                    
+                    
+                </div>
+            </div>
+            <span style="color:#666666;">
+                Air quality index (AQI) and PM2.5 air pollution in 
+                {{province_en}}
+            </span>
+
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-12" style="margin-top: 20px;">
+            <hr>
+            <h3>Province of Thailand Cleanest city ranking</h3>
+            <!-- {{ topAqi }} -->
+            <table class="table table-boreded" style="width: 50%; position: absolute; right: 25%;">
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Province</th>
+                    <th class="text-center">AQI</th>
+                </tr>
+                {% for row in topAqi %}         
+                    <tr style="background-color: {{row['color']}}; color: #ffffff;">
+                        <td>{{ row['id'] }}</td>
+                        <td class="text-left">{{ row['en'] }}</td>
+                        <td>{{ row['aqi'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+	var map;
+	var markercluster;
+	function init() {
+        console.warn("start MAP");
+		map = new longdo.Map({
+			placeholder: document.getElementById('map'),
+			language: 'en',
+			location: {lat:13.799588, lon:100.589224},			
+			zoom: 6
+		});
+		map.zoomRange({ min:6, max:10 });		
+
+		markercluster = new lmc.MarkerCluster(map,{minClusterSize:2});
+		// markercluster.addMarkers(new longdo.Marker({lat: 16.4419355, lon: 102.8359921},{ title: '12345' }));
+        
+        {% for row in province %}         
+        //  {{row['th']}}
+            markercluster.addMarkers( new longdo.Marker(
+                { lat: {{row['lat']}}, lon: {{row['lon']}} },
+                {
+                    title: '{{row['en']}}',
+                    icon: {
+                        html: '<div class="marker" style="background-color:{{ row['color'] }}"><a href="/AQI?pid={{row['id']}}" style="color: {{ row['color'] }};">*</a></div>',
+                        // offset: { x: 18, y: 21 }
+                        // {{row['en']}}<br>AQI : {{row['aqi']}}
+                    }
+                }
+            ));       
+        {% endfor %}
+		// markercluster.addMarkers( new longdo.Marker(
+		// 	{ lat: 16.44, lon: 102.835 },
+		// 	{
+		// 		title: 'Khon Kaen',
+		// 		icon: {
+		// 			html: '<div class="marker"><a href="#" style="color: #ffffff;">10</a></div>'
+		// 			// offset: { x: 18, y: 21 }
+		// 		}
+		// 	}
+		// ));
+
+		markercluster.render();
+	}
+
+</script>
+
+{% endblock %}

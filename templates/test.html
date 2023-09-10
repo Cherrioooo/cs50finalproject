@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    EXams
+{% endblock %}
+
+{% block main %}
+
+<!-- {{province}} -->
+            {% for row in province %}
+         
+                    {{row['th']}} <hr>
+                  
+            {% endfor %}
+
+{% endblock %}
