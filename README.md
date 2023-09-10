@@ -43,7 +43,7 @@ Certainly, here are the steps to sign up for View AQI:
     * Confirm Password: Re-enter the password to confirm it matches the one you provided above.
 5. Click the "Register" button to submit your registration.
 
-<center><img src="screen/signup.jpg"  width="50%" height="50%" /></center>
+<center><img src="screen/signup.jpg"  width="80%" height="80%" /></center>
 
 ---
 ## Login
@@ -56,15 +56,15 @@ Upon running the web application, you will be redirected to the login page. If y
 2. select the  regional or province you want to view air quality.
 3. View AQI Data: Once you've selected your location, the website will display the AQI value for your area, often accompanied by a color-coded scale that indicates air quality conditions (e.g., good, moderate, unhealthy).
 
-<center><img src="screen/map.jpg"  width="50%" height="50%" /></center>
-<center><img src="screen/northeast-thailand.jpg"  width="50%" height="50%" /></center>
-<center><img src="screen/index.jpg"  width="50%" height="50%" /></center>
+<center><img src="screen/map.jpg"  width="80%" height="80%" /></center>
+<center><img src="screen/northeast-thailand.jpg"  width="80%" height="80%" /></center>
+<center><img src="screen/index.jpg"  width="80%" height="80%" /></center>
 
 ---
 ## Favorite province 
 To view your Favorite province, Click on the "Favorite" tab in the navigation bar.
 
-<center><img src="screen/favorite.jpg"  width="50%" height="50%" /></center>
+<center><img src="screen/favorite.jpg"  width="80%" height="80%" /></center>
 
 ---
 
